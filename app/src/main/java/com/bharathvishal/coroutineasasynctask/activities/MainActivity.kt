@@ -29,9 +29,12 @@ class MainActivity : ComponentActivity(), CoroutineScope by MainScope() {
     private var enabled2 = mutableStateOf(true)
     private var valueOfText = mutableStateOf(0)
 
+    private val CoroutineLOGTAG = "CoroutineLOGTAG"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //Applies Material dynamic theming
         try {
             DynamicColors.applyToActivityIfAvailable(this)
         } catch (e: Exception) {
@@ -42,7 +45,6 @@ class MainActivity : ComponentActivity(), CoroutineScope by MainScope() {
 
         setContent {
             Material3AppTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -53,20 +55,26 @@ class MainActivity : ComponentActivity(), CoroutineScope by MainScope() {
         }
     }
 
-
+    //Method returns a Job Instance
     private fun simpleCoroutineTask(context: Context): Job {
         val contextRef: WeakReference<Context> = WeakReference(context)
 
-        //This region is similar to pre-execute
+        //This region below can be considered similar to pre-execute
+        /*
+         *
+         */
 
         @Suppress("UNUSED_VARIABLE")
         val job = launch(Dispatchers.Default) {
             val context1 = contextRef.get()
+
+            //The region below can be considered similar to DoinBg
+            //Runs in a background thread
             try {
                 for (i in 1..100) {
                     if (isActive) {
                         delay(250)
-                        Log.d("coroutine1", "val : $i")
+                        Log.d(CoroutineLOGTAG, "val : $i")
                         runOnUiThread {
                             valueOfText.value++
                         }
@@ -76,7 +84,7 @@ class MainActivity : ComponentActivity(), CoroutineScope by MainScope() {
                     }
                 }
             } catch (e: CancellationException) {
-                Log.d("coroutine1", "Encountered cancellation exception")
+                Log.d(CoroutineLOGTAG, "Encountered cancellation exception")
                 //This region is similar to onCancelled in an Async Task
                 runOnUiThread {
                     Toast.makeText(context1, "Coroutine cancelled", Toast.LENGTH_SHORT).show()
@@ -86,16 +94,17 @@ class MainActivity : ComponentActivity(), CoroutineScope by MainScope() {
                     valueOfText.value = 0
                 }
             } catch (e: Exception) {
+                Log.d(CoroutineLOGTAG, "Encountered an exception")
                 e.printStackTrace()
-                Log.d("coroutine1", "Encountered  exception")
             }
 
             //UI Thread
             //Similar to post execute
             withContext(Dispatchers.Main) {
-                val context12 = contextRef.get()
-                Log.d("coroutine1", "coroutine finished executing")
-                Toast.makeText(context12, "Coroutine finished executing", Toast.LENGTH_SHORT).show()
+                val contextTemp = contextRef.get()
+                Log.d(CoroutineLOGTAG, "Coroutine finished executing")
+                Toast.makeText(contextTemp, "Coroutine finished executing", Toast.LENGTH_SHORT)
+                    .show()
 
                 enabled1.value = true
                 enabled2.value = true
@@ -192,9 +201,13 @@ class MainActivity : ComponentActivity(), CoroutineScope by MainScope() {
 
     override fun onDestroy() {
         super.onDestroy()
+
+        //Cancels the current coroutine scope and any running task on destroy
         cancel()
     }
 
+
+    //Preview for jetpack composable view
     @Preview(showBackground = true)
     @Composable
     fun DefaultPreview() {
