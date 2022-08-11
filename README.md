@@ -10,7 +10,7 @@ An example project that shows a coroutine implementation similar to an async tas
 
 &nbsp;
 ### Features :
-- Cooutine implementation of Async task.
+- Sample coroutine implementation of Async task.
 - Material design 3.0 with dynamic theming.
 - Uses Jetpack Compose.
 
