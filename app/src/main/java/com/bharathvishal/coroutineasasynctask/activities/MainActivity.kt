@@ -9,7 +9,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -157,10 +158,6 @@ class MainActivity : ComponentActivity(), CoroutineScope by MainScope() {
                     horizontalAlignment = Alignment.CenterHorizontally,
                 )
                 {
-                    //enabled1 = remember { mutableStateOf(true) }
-                    //enabled2 = remember { mutableStateOf(true) }
-                    //var enabled2 by remember { mutableStateOf(true) }
-
                     Text(
                         text = "" + valueOfText.value,
                         textAlign = TextAlign.Center,
