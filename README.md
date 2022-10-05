@@ -35,7 +35,7 @@ An example project that shows a coroutine implementation similar to an async tas
 &nbsp;
 
 ### SDK Info : 
-Min SDK : 23  | Target SDK : 33 | Gradle : 7.2.2  | Kotlin | Jetpack Compose
+Min SDK : 23  | Target SDK : 33 | Gradle : 7.3.0  | Kotlin | Jetpack Compose
 
 &nbsp;
 
