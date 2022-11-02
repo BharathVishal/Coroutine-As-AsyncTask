@@ -127,7 +127,7 @@ class MainActivity : ComponentActivity(), CoroutineScope by MainScope() {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun TopAppBarMain() {
-        SmallTopAppBar(
+        TopAppBar(
             title = { Text("Coroutine As Async Implementation") },
             colors = TopAppBarDefaults.smallTopAppBarColors(
                 titleContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
