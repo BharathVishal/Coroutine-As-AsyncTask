@@ -9,6 +9,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
+import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
@@ -129,9 +130,9 @@ class MainActivity : ComponentActivity(), CoroutineScope by MainScope() {
     fun TopAppBarMain() {
         TopAppBar(
             title = { Text("Coroutine As Async Implementation") },
-            colors = TopAppBarDefaults.smallTopAppBarColors(
-                titleContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                containerColor = MaterialTheme.colorScheme.surface
+            colors = topAppBarColors(
+                containerColor = MaterialTheme.colorScheme.surface,
+                titleContentColor = MaterialTheme.colorScheme.onSurfaceVariant
             )
         )
     }
