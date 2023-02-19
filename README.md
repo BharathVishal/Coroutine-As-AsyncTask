@@ -48,6 +48,12 @@ Android Studio Dolphin | 2021.3.1 Patch 1
 
 &nbsp;
 
+#### License : 
+[Apache License 2.0](https://github.com/BharathVishal/Coroutine-As-AsyncTask/blob/main/LICENSE)
+&nbsp;
+
+&nbsp;
+
 © 2022-2023. Developed by Bharath Vishal G (https://github.com/BharathVishal).
 
 Thank you. :smile:
