@@ -56,4 +56,5 @@ Android Studio Dolphin | 2021.3.1 Patch 1
 
 © 2022-2023. Developed by Bharath Vishal G (https://github.com/BharathVishal).
 
-Thank you. :smile:
+Thank you. :slightly_smiling_face:
+
