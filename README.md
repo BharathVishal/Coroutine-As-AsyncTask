@@ -35,15 +35,13 @@ An example project that shows a coroutine implementation similar to an async tas
 &nbsp;
 
 ### SDK Info : 
-Min SDK : 23  | Target SDK : 34 | Gradle : 8.0.2  | Kotlin | Jetpack Compose
+Min SDK : 23  | Target SDK : 34 | Gradle : 8.1.0  | Kotlin | Jetpack Compose
 
 &nbsp;
 
 
 ### Android Studio Version : 
-Android Studio Flamingo | 2022.2.1 Patch 2
-
-
+Android Studio Giraffe | 2022.3.1
 
 
 &nbsp;
