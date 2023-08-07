@@ -29,6 +29,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,9 +48,9 @@ class MainActivity : ComponentActivity(), CoroutineScope by MainScope() {
 
     private var enabled1 = mutableStateOf(true)
     private var enabled2 = mutableStateOf(true)
-    private var valueOfText = mutableStateOf(0)
+    private var valueOfText = mutableIntStateOf(0)
 
-    private val CoroutineLOGTAG = "CoroutineLOGTAG"
+    private val coroutinelogtag = "coroutinelogtag"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,8 +82,12 @@ class MainActivity : ComponentActivity(), CoroutineScope by MainScope() {
 
         //This region below can be considered similar to pre-execute
         /*
-         *
          */
+        val contexttmp = contextRef.get()
+        Toast.makeText(contexttmp, "Coroutine started", Toast.LENGTH_SHORT)
+            .show()
+        /*
+        */
 
         @Suppress("UNUSED_VARIABLE")
         val job = launch(Dispatchers.Default) {
@@ -94,27 +99,20 @@ class MainActivity : ComponentActivity(), CoroutineScope by MainScope() {
                 for (i in 1..100) {
                     if (isActive) {
                         delay(250)
-                        Log.d(CoroutineLOGTAG, "val : $i")
+                        Log.d(coroutinelogtag, "val : $i")
                         runOnUiThread {
-                            valueOfText.value++
+                            valueOfText.intValue++
                         }
                     }
                     if (!isActive) {
                         break
                     }
                 }
+                Log.d(coroutinelogtag,"came here")
             } catch (e: CancellationException) {
-                Log.d(CoroutineLOGTAG, "Encountered cancellation exception")
-                //This region is similar to onCancelled in an Async Task
-                runOnUiThread {
-                    Toast.makeText(context1, "Coroutine cancelled", Toast.LENGTH_SHORT).show()
-
-                    enabled1.value = true
-                    enabled2.value = true
-                    valueOfText.value = 0
-                }
+                Log.d(coroutinelogtag, "Encountered cancellation exception")
             } catch (e: Exception) {
-                Log.d(CoroutineLOGTAG, "Encountered an exception")
+                Log.d(coroutinelogtag, "Encountered an exception")
                 e.printStackTrace()
             }
 
@@ -122,13 +120,29 @@ class MainActivity : ComponentActivity(), CoroutineScope by MainScope() {
             //Similar to post execute
             withContext(Dispatchers.Main) {
                 val contextTemp = contextRef.get()
-                Log.d(CoroutineLOGTAG, "Coroutine finished executing")
+                Log.d(coroutinelogtag, "Coroutine finished executing")
                 Toast.makeText(contextTemp, "Coroutine finished executing", Toast.LENGTH_SHORT)
                     .show()
 
                 enabled1.value = true
                 enabled2.value = true
-                valueOfText.value = 0
+                valueOfText.intValue = 0
+            }
+        }
+
+
+        job.invokeOnCompletion {
+            val context1 = contextRef.get()
+            //This region is similar to onCancelled in an Async Task
+            if(job.isCancelled)
+            {
+                runOnUiThread {
+                    Toast.makeText(context1, "Coroutine cancelled", Toast.LENGTH_SHORT).show()
+
+                    enabled1.value = true
+                    enabled2.value = true
+                    valueOfText.intValue = 0
+                }
             }
         }
         return job
@@ -178,7 +192,7 @@ class MainActivity : ComponentActivity(), CoroutineScope by MainScope() {
                 )
                 {
                     Text(
-                        text = "" + valueOfText.value,
+                        text = "" + valueOfText.intValue,
                         textAlign = TextAlign.Center,
                         modifier = Modifier
                             .padding(9.dp)
@@ -188,6 +202,7 @@ class MainActivity : ComponentActivity(), CoroutineScope by MainScope() {
 
                     Button(
                         onClick = {
+                            //Starts the coroutine
                             coroutineJobObject = simpleCoroutineTask(activityContext)
 
                             enabled1.value = false
@@ -199,8 +214,9 @@ class MainActivity : ComponentActivity(), CoroutineScope by MainScope() {
                     }
                     Button(
                         onClick = {
+                            //Cancels the active coroutine
                             if (coroutineJobObject?.isActive == true)
-                                coroutineJobObject?.cancel(CancellationException("Coroutine Cancelled"))
+                                coroutineJobObject?.cancel()
 
                             enabled1.value = true
                             enabled2.value = true
