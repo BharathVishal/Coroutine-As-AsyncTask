@@ -51,6 +51,12 @@ Android Studio Giraffe | 2022.3.1 Patch 1
 &nbsp;
 
 &nbsp;
+####
+Android is a trademark of Google LLC. 
+
+&nbsp;
+&nbsp;
+
 
 © 2022-2023. Developed by Bharath Vishal G (https://github.com/BharathVishal).
 
