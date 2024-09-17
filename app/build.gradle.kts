@@ -6,16 +6,16 @@ plugins {
 
 android {
     namespace = "com.bharathvishal.coroutineasasynctask"
-    compileSdk = 34
+    compileSdk = 35
     defaultConfig {
         applicationId = "com.bharathvishal.coroutineasasynctask"
         vectorDrawables {
             useSupportLibrary = true
         }
         minSdk = 23
-        targetSdk = 34
-        versionCode = 25
-        versionName = "1.0.14"
+        targetSdk = 35
+        versionCode = 28
+        versionName = "1.0.15"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures {
@@ -49,7 +49,7 @@ android {
         jvmTarget = "17"
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.14"
+        kotlinCompilerExtensionVersion = "1.5.15"
     }
 
     packaging {
