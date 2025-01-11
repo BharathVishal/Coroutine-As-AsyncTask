@@ -20,11 +20,15 @@ package com.bharathvishal.coroutineasasynctask.activities
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
@@ -36,6 +40,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.view.WindowCompat
 import com.google.android.material.color.DynamicColors
 import com.vishtekstudios.coroutineasasynctask.ui.theme.Material3AppTheme
 import kotlinx.coroutines.*
@@ -53,6 +58,14 @@ class MainActivity : ComponentActivity(), CoroutineScope by MainScope() {
     private val coroutinelogtag = "coroutinelogtag"
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+                enableEdgeToEdge()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
         super.onCreate(savedInstanceState)
 
         //Applies Material dynamic theming
@@ -74,6 +87,7 @@ class MainActivity : ComponentActivity(), CoroutineScope by MainScope() {
                 }
             }
         }
+
     }
 
     //Method returns a Job Instance
@@ -108,7 +122,7 @@ class MainActivity : ComponentActivity(), CoroutineScope by MainScope() {
                         break
                     }
                 }
-                Log.d(coroutinelogtag,"came here")
+                Log.d(coroutinelogtag, "came here")
             } catch (e: CancellationException) {
                 Log.d(coroutinelogtag, "Encountered cancellation exception")
             } catch (e: Exception) {
@@ -134,8 +148,7 @@ class MainActivity : ComponentActivity(), CoroutineScope by MainScope() {
         job.invokeOnCompletion {
             val context1 = contextRef.get()
             //This region is similar to onCancelled in an Async Task
-            if(job.isCancelled)
-            {
+            if (job.isCancelled) {
                 runOnUiThread {
                     Toast.makeText(context1, "Coroutine cancelled", Toast.LENGTH_SHORT).show()
 
