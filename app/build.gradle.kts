@@ -6,16 +6,16 @@ plugins {
 
 android {
     namespace = "com.bharathvishal.coroutineasasynctask"
-    compileSdk = 35
+    compileSdk = 36
     defaultConfig {
         applicationId = "com.bharathvishal.coroutineasasynctask"
         vectorDrawables {
             useSupportLibrary = true
         }
         minSdk = 23
-        targetSdk = 35
-        versionCode = 32
-        versionName = "1.0.17"
+        targetSdk = 36
+        versionCode = 34
+        versionName = "1.0.18"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures {
