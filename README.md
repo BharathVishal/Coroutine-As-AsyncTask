@@ -35,13 +35,13 @@ An example project that shows a coroutine implementation similar to an async tas
 &nbsp;
 
 ### SDK Info : 
-Min SDK : 23  | Target SDK : 36 | Gradle : 8.13.0  | Kotlin | Jetpack Compose
+Min SDK : 23  | Target SDK : 36 | Gradle : 8.13.2  | Kotlin | Jetpack Compose
 
 &nbsp;
 
 
 ### Android Studio Version : 
-Android Studio Narwhal 4 Feature Drop | 2025.1.4
+Android Studio Otter 2 Feature Drop | 2025.2.2 Patch 1
 
 
 &nbsp;
@@ -58,7 +58,7 @@ Android is a trademark of Google LLC.
 &nbsp;
 
 
-© 2022-2025. Developed by Bharath Vishal G (https://github.com/BharathVishal).
+© 2022-2026. Developed by Bharath Vishal G (https://github.com/BharathVishal).
 
 Thank you. :slightly_smiling_face:
 
