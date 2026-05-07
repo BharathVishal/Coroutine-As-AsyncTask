@@ -2,11 +2,11 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.compose.compiler)
 }
 
 android {
+    buildFeatures.buildConfig = false
     namespace = "com.bharathvishal.coroutineasasynctask"
     compileSdk = 36
     defaultConfig {
@@ -16,8 +16,8 @@ android {
         }
         minSdk = 23
         targetSdk = 36
-        versionCode = 41
-        versionName = "1.0.25"
+        versionCode = 45
+        versionName = "1.0.26"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures {
